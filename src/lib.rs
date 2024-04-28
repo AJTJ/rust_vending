@@ -42,30 +42,30 @@ pub struct VendingMachine {
     total_sales: i32,
 }
 
-// The public-facing API
 impl VendingMachine {
-    // for viewing price
-    fn select_item_get_price() {
+    // NOTE: It is important to separate the differences between public and private endpoints.
+    // Here I am making it clea
+    pub fn select_item_get_price() {
         unimplemented!()
     }
 
     // TRANSACTIONS
-    fn insert_coin(self: &mut Self, c: Coin) {
+    pub fn insert_coin(self: &mut Self, c: Coin) {
         let mut coin_type = self.coins.get(&c);
         let coin_val = coin_type.get_or_insert(&0);
         self.coins.insert(c, 1 + *coin_val);
     }
 
-    fn refund() {
+    pub fn refund() {
         // system to spit out coins
         unimplemented!()
     }
 
-    fn insufficent_product(&self, p: Product) {
+    pub fn insufficent_product(&self, p: Product) {
         unimplemented!()
     }
 
-    fn make_purchase_get_change(&mut self, p_choice: Product) {
+    pub fn make_purchase_get_change(&mut self, p_choice: Product) {
         let inv = &mut self.inventory;
         let item = inv.get(&p_choice);
 
@@ -80,15 +80,24 @@ impl VendingMachine {
             }
         }
 
+        // TODO: create other public facing API endpoints
         // decrement balance
         // send product
         // return change
+
+        self.private_function_name();
 
         unimplemented!()
     }
 }
 
-// A factory patter for initializing a vending machine
+impl VendingMachine {
+    fn private_function_name(&self) {
+        unimplemented!()
+    }
+}
+
+// A factory pattern for initializing a vending machine
 pub struct VendingCreator;
 
 impl VendingCreator {
